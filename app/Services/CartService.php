@@ -19,8 +19,8 @@ class CartService
         ->get()
         ->map(function($dish) {
             $dish->count = $this->cart[$dish->id];
-            // $dish->sum = $dish->count * $dish->price;
-            // $this->total += $dish->sum;
+            $dish->sum = $dish->count * $dish->price;
+            $this->total += $dish->sum;
             return $dish;
         });
 

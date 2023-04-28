@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('dishes', function (Blueprint $table) {
             $table->id();
             $table->string('title', 100);
+            $table->decimal('price', 10, 2)->unsigned();
             $table->text('description')->nullable();
             $table->unsignedBigInteger('menu_id');
             $table->foreign('menu_id')->references('id')->on('menus');

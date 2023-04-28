@@ -49,6 +49,11 @@
                             <label class="form-label">Patiekalo pavadinimas</label>
                             <input type="text" name="dish_title" class="form-control" value="{{old('dish_title')}}">
                         </div>
+                        <div class="mb-3">
+                            <label class="form-label">Kaina</label>
+                            <input type="text" name="price" class="form-control" value="{{old('price')}}">
+                        </div>
+
                         <div class="col-3">
                             <div class="mb-3">
                                 <label class="form-label">Nuotrauka</label>

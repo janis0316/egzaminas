@@ -129,6 +129,8 @@
 
                                 <div class="col-3">
                                     <form action="{{route('add-to-cart')}}" method="post" style="text-align: right">
+                                        <div class="price"> {{$dish->price}} Eur</div>
+
                                         <button type="submit" class="btn btn-secondary">Į krepšelį</button>
                                         <input type="number" min="1" name="count" value="1" style="width:50px; border-radius: 5px; margin-top: 3px">
                                         <input type="hidden" name="product" value="{{$dish->id}}">

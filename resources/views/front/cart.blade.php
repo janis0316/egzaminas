@@ -32,7 +32,7 @@
                                     </div>
                                     <div class="col-1">
 
-                                        {{-- {{$dish->sum}} Eur --}}
+                                        {{$dish->sum}} Eur
                                     </div>
                                     <div class="col-1">
                                         <input type="number" min="1" name="count[]" value="{{$dish->count}}" style="width: 50px">

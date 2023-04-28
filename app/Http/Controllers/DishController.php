@@ -67,6 +67,7 @@ class DishController extends Controller
         $dish->menu_id = $request->menu_id;
         $dish->title = $request->dish_title;
         $dish->description = $request->description;
+        $dish->price = $request->price;
         $dish->save();
 
         return redirect()->route('dishes-index')->with('ok', 'Patiekalas sukurtas');
