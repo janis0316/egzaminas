@@ -106,10 +106,10 @@ class PlaceController extends Controller
      */
     public function destroy(Place $place)
     {
-        // if (!$place->placeMenu()->count()) {
+        if (!$place->placeMenu()->count()) {
             $place->delete();
             return redirect()->route('places-index')->with('ok', 'Maitinimo įstaiga ištrinta');
-        // }
-        // return redirect()->back()->with('bad', 'Maitinimo įstaiga negali būti ištrinta');
+        }
+        return redirect()->back()->with('bad', 'Maitinimo įstaiga negali būti ištrinta');
     }
 }

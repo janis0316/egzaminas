@@ -60,7 +60,7 @@ class DishController extends Controller
             // $manager = new ImageManager(['driver' => 'GD']);
 
             $photo->move(public_path().'/dishes', $file);
-            $hotel->photo = '/dishes/' . $file;
+            $dish->photo = '/dishes/' . $file;
 
         }
 
@@ -109,7 +109,7 @@ class DishController extends Controller
         );
 
                  if ($request->delete_photo) {
-            $hotel->deletePhoto();
+            $dish->deletePhoto();
             return redirect()->back()->with('ok', 'Nuotrauka ištrinta');
         }
 
@@ -122,18 +122,18 @@ class DishController extends Controller
             // $image = $manager->make($photo);
             // $image->resize(400, 300);
             
-            if ($hotel->photo) {
-                $hotel->deletePhoto();
+            if ($dish->photo) {
+                $dish->deletePhoto();
             }
             
-            $photo->move(public_path().'/hotels', $file);
+            $photo->move(public_path().'/dishes', $file);
         
-            // $image->save(public_path().'/hotels/'.$file);
-            $hotel->photo = '/hotels/' . $file;
+            // $image->save(public_path().'/dishess/'.$file);
+            $dish->photo = '/dishes/' . $file;
             
         }
 
-        $dish->manu_id = $request->menu_id;
+        $dish->menu_id = $request->menu_id;
         $dish->title = $request->dish_title;
         $dish->save();
 

@@ -17,7 +17,7 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->unsignedBigInteger('menu_id');
             $table->foreign('menu_id')->references('id')->on('menus');
-            // $table->string('photo', 200)->nullable();
+            $table->string('photo', 200)->nullable();
             $table->timestamps();
         });
     }
