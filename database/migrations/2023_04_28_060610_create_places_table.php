@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::create('places', function (Blueprint $table) {
             $table->id();
+            $table->string('title', 100);
+            $table->decimal('code', 10, 0)->unsigned();
+            $table->string('address', 100);
             $table->timestamps();
         });
     }

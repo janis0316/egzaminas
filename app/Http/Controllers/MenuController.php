@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Menu;
-use App\Http\Requests\StoreMenuRequest;
-use App\Http\Requests\UpdateMenuRequest;
+use App\Models\Place;
+use Illuminate\Http\Request;
+use Intervention\Image\ImageManager;
+use Illuminate\Support\Facades\Validator;
 
 class MenuController extends Controller
 {
@@ -13,7 +15,10 @@ class MenuController extends Controller
      */
     public function index()
     {
-        //
+        $menus = Menu::orderBy('id', 'desc')->get();
+        return view('back.menus.index', [
+        'menus' => $menus
+        ]);
     }
 
     /**
@@ -21,15 +26,32 @@ class MenuController extends Controller
      */
     public function create()
     {
-        //
+        $places = Place::all()->sortBy('place');
+        return view('back.menus.create', [
+        'places' => $places
+        ]);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreMenuRequest $request)
+    public function store(Request $request)
     {
-        //
+        $validate = $request->validate(
+            [
+                'menu_title' => 'required',
+            ],
+            [
+                'menu_title.required' => 'Užpildykite pavadinimo laukelį',
+            ]
+        );
+
+        $menu = new Menu;
+        $menu->place_id = $request->place_id;
+        $menu->title = $request->menu_title;
+        $menu->save();
+
+        return redirect()->route('menus-index')->with('ok', 'Valgiaraštis sukurtas');
     }
 
     /**
@@ -37,7 +59,7 @@ class MenuController extends Controller
      */
     public function show(Menu $menu)
     {
-        //
+        return view('back.menus.show', ['menu' => $menu]);
     }
 
     /**
@@ -45,15 +67,32 @@ class MenuController extends Controller
      */
     public function edit(Menu $menu)
     {
-        //
+        $places = Place::all()->sortBy('title');
+        return view('back.menus.edit', [
+            'menu' => $menu,
+            'places' => $places
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateMenuRequest $request, Menu $menu)
+    public function update(Request $request, Menu $menu)
     {
-        //
+        $validate = $request->validate(
+            [
+                'menu_title' => 'required',
+            ],
+            [
+                'menu_title.required' => 'Užpildykite pavadinimo laukelį',
+            ]
+        );
+
+        $menu->place_id = $request->place_id;
+        $menu->title = $request->menu_title;
+        $menu->save();
+
+        return redirect()->route('menus-index')->with('ok', 'Valgiaraštis paredaguotas');
     }
 
     /**
@@ -61,6 +100,7 @@ class MenuController extends Controller
      */
     public function destroy(Menu $menu)
     {
-        //
+        $menu->delete(); 
+        return redirect()->route('menus-index')->with('ok', 'Valgiaraštis ištrintas');
     }
 }
