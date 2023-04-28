@@ -1,0 +1,10 @@
+@import 'variables';
+
+// Bootstrap
+@import 'bootstrap/scss/bootstrap';
+
+.back-hotels {
+        border: 2px solid rgb(238, 238, 238);
+        box-shadow: 0 5px 5px rgba(0, 0, 0, 0.6);
+            border-radius: 10px;
+}
