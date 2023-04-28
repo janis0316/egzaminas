@@ -1,3 +1,4 @@
+@inject('cart', 'App\Services\CartService')
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
@@ -7,14 +8,17 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    {{-- <title>{{ config('app.name', 'Laravel') }}</title> --}}
+    <title>Travel</title>
 
     <!-- Fonts -->
-    <link rel="dns-prefetch" href="//fonts.gstatic.com">
-    <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inria+Sans:wght@300;400&family=Sarpanch:wght@400;900&display=swap" rel="stylesheet">
 
     <!-- Scripts -->
-    @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+    @vite(['resources/sass/back/app.scss', 'resources/js/back/app.js'])
+
 </head>
 <body>
     <div id="app">
@@ -35,6 +39,69 @@
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ms-auto">
+
+
+                        @if(Auth::user()?->role == 'admin')
+                        <li class=" nav-item dropdown">
+                            <a style="margin-top:13px" id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                Maitinimo įstaigos
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="{{ route('places-index') }}">Maitinimo įstaigų sąrašas</a>
+                                @if(Auth::user()?->role == 'admin')
+                                <a class="dropdown-item" href="{{ route('places-create') }}">Nauja matinimo įstaiga</a>
+                                @endif
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a style="margin-top:13px" id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+
+                                Valgiaraščiai
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="{{ route('menus-index') }}">Valgiaraščių sąrašas</a>
+                                @if(Auth::user()?->role == 'admin')
+                                <a class="dropdown-item" href="{{ route('menus-create') }}">Naujas Valgiaraštis</a>
+                                @endif
+                            </div>
+                        </li>
+
+                        <li class="nav-item dropdown">
+                            <a style="margin-top:13px" id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+
+                                Patiekalai
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="{{ route('dishes-index') }}">Patiekalų sąrašas</a>
+                                @if(Auth::user()?->role == 'admin')
+                                <a class="dropdown-item" href="{{ route('dishes-create') }}">Naujas Patiekalas</a>
+                                @endif
+                            </div>
+                        </li>
+
+
+                        <li class="nav-item dropdown">
+                            <a style="margin-top:13px" id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+
+                                Užsakymai
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="{{ route('orders-index') }}">Užsakymų sąrašas</a>
+                            </div>
+                        </li>
+
+                        <li class="nav-item dropdown">
+                            <a style="margin-top:13px" id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+
+                                Vartotojų patiekalai
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="{{ url('/') }}">Vartotojų patiekalai</a>
+                            </div>
+                        </li>
+
+                        @endif
+
                         <!-- Authentication Links -->
                         @guest
                         @if (Route::has('login'))

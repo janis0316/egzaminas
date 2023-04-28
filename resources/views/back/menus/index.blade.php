@@ -19,7 +19,7 @@
 
 
                     @forelse($menus as $menu)
-                    <div class="col-3" style="padding-bottom: 20px">
+                    <div class="col-3" style="padding-bottom: 20px; border: 2px solid grey; border-radius: 10px">
                         <div class="back-menus">
                             <div class="card-header">
                                 <h2 style="text-align: center">{{$menu->title}}</h2>

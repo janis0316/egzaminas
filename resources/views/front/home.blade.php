@@ -99,55 +99,57 @@
                 @forelse($dishes as $dish)
                 <div class="col-6">
 
-                    <div class="top">
 
-                        {{-- INFO PASPAUDUS ANT NUOTRAUKOS --}}
 
-                        <div class="back-dishes">
+                    {{-- INFO PASPAUDUS ANT NUOTRAUKOS --}}
 
-                            <h3 class="dish-name">
-                                {{$dish->title}}
-                            </h3>
-                            <a href="{{route('show-dish', $dish)}}">
-                                @if($dish->photo)
-                                <img src="{{asset($dish->photo)}}">
-                                @else
-                                <img class="small-img" src="{{asset('empty.jpg')}}" style="width: 100%">
-                                @endif
-                            </a>
-                            {{-- <div class="bottom-left">
-                                    <div class="type"> {{$dish->menuPlace->title}}
+                    <div class="back-dishes">
+                        <div class="card-header">
+                            <h2 style="text-align: center">{{$dish->title}}</h2>
+
                         </div>
-                    </div> --}}
-                </div>
+                        <div class="card-body">
 
-            </div>
+                            <div class="d-flex">
 
-            <div class="container bottom">
-                <div class="row" style="margin-top: 5px">
+                                @if($dish->photo)
+                                <img style="width: 500px" src="{{asset($dish->photo)}}">
+                                @else
+                                <img style="width: 500px" class="small-img" src="{{asset('empty.jpg')}}" style="width: 100%">
 
-                    <div class="col-3">
-                        <form action="{{route('add-to-cart')}}" method="post" style="text-align: right">
-                            <button type="submit" class="btn btn-secondary">Į krepšelį</button>
-                            <input type="number" min="1" name="count" value="1" style="width:50px; border-radius: 5px; margin-top: 3px">
-                            <input type="hidden" name="product" value="{{$dish->id}}">
+                                @endif
 
-                            @csrf
-                        </form>
+                                {{-- <div class="bottom-left"><div class="type"> {{$dish->menuPlace->title}} --}}
+                            </div>
 
+                        </div>
+
+                        <div class="container bottom">
+                            <div class="row" style="margin-top: 5px">
+
+                                <div class="col-3">
+                                    <form action="{{route('add-to-cart')}}" method="post" style="text-align: right">
+                                        <button type="submit" class="btn btn-secondary">Į krepšelį</button>
+                                        <input type="number" min="1" name="count" value="1" style="width:50px; border-radius: 5px; margin-top: 3px">
+                                        <input type="hidden" name="product" value="{{$dish->id}}">
+
+                                        @csrf
+                                    </form>
+
+                                </div>
+                            </div>
+
+                        </div>
                     </div>
+                    @empty
+                    <div class="list-group-item">Patiekalų nėra</div>
+                    @endforelse
                 </div>
 
             </div>
         </div>
-    </div>
 
-</div>
-</div>
-@empty
-<div class="list-group-item">Patiekalų nėra</div>
-@endforelse
-</div>
+    </div>
 </div>
 </div>
 
