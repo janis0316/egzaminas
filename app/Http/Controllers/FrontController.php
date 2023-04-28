@@ -149,6 +149,6 @@ class FrontController extends Controller
         $cart->empty();
 
         //alert
-        return redirect()->route('start')->with('ok', 'Viešbutis užsakytas');
+        return redirect()->route('start')->with('ok', 'Patiekalai užsakyti');
     }
 }

@@ -98,66 +98,57 @@
             <div class="row justify-content-center">
                 @forelse($dishes as $dish)
                 <div class="col-6">
-                    <div class="dish">
-                        <div class="top">
 
-                            {{-- INFO PASPAUDUS ANT NUOTRAUKOS --}}
+                    <div class="top">
+
+                        {{-- INFO PASPAUDUS ANT NUOTRAUKOS --}}
+
+                        <div class="back-dishes">
+
+                            <h3 class="dish-name">
+                                {{$dish->title}}
+                            </h3>
                             <a href="{{route('show-dish', $dish)}}">
-                                <div class="smallimg">
-                                    @if($dish->photo)
-                                    <img src="{{asset($dish->photo)}}">
-                                    @else
-                                    <img class="small-img" src="{{asset('empty.jpg')}}" style="width: 100%">
-                                    @endif
-                                    <div class="bottom-left">
-                                        <h3 class="dish-name">
-                                            {{$dish->title}}
-                                        </h3>
-                                        {{-- <div class="type"> {{$dish->menuPlace->title}} --}}
-                                    </div>
-                                </div>
-                                <div class="bottom-right">
-                                </div>
+                                @if($dish->photo)
+                                <img src="{{asset($dish->photo)}}">
+                                @else
+                                <img class="small-img" src="{{asset('empty.jpg')}}" style="width: 100%">
+                                @endif
+                            </a>
+                            {{-- <div class="bottom-left">
+                                    <div class="type"> {{$dish->menuPlace->title}}
                         </div>
-                        </a>
-
-                    </div>
-
-                    <div class="container bottom">
-                        <div class="row">
-                            <div class="col-12">
-
-
-                            </div>
-                        </div>
-                        <div class="row" style="margin-top: 5px">
-                            <div class="col-3">
-
-                            </div>
-                            <div class="col-6 justify-content-center" style="margin: auto">
-
-                            </div>
-                            <div class="col-3">
-                                <form action="{{route('add-to-cart')}}" method="post" style="text-align: right">
-                                    <button type="submit" class="btn btn-secondary">Į krepšelį</button>
-                                    <input type="number" min="1" name="count" value="1" style="width:50px; border-radius: 5px; margin-top: 3px">
-                                    <input type="hidden" name="product" value="{{$dish->id}}">
-
-                                    @csrf
-                                </form>
-
-                            </div>
-                        </div>
-
-                    </div>
-
+                    </div> --}}
                 </div>
+
             </div>
-            @empty
-            <div class="list-group-item">Viešbučių nėra</div>
-            @endforelse
+
+            <div class="container bottom">
+                <div class="row" style="margin-top: 5px">
+
+                    <div class="col-3">
+                        <form action="{{route('add-to-cart')}}" method="post" style="text-align: right">
+                            <button type="submit" class="btn btn-secondary">Į krepšelį</button>
+                            <input type="number" min="1" name="count" value="1" style="width:50px; border-radius: 5px; margin-top: 3px">
+                            <input type="hidden" name="product" value="{{$dish->id}}">
+
+                            @csrf
+                        </form>
+
+                    </div>
+                </div>
+
+            </div>
         </div>
     </div>
+
+</div>
+</div>
+@empty
+<div class="list-group-item">Patiekalų nėra</div>
+@endforelse
+</div>
+</div>
 </div>
 
 {{-- PUSLAPIAI APACIOJE --}}

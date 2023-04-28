@@ -13,7 +13,14 @@ class OrderController extends Controller
      */
     public function index()
     {
-        //
+        $orders = Order::orderBy('created_at', 'desc')
+        ->get()
+        ->map(function($dish) {
+            $dish->dishes = json_decode($dish->order_json);
+            return $dish;
+        });
+
+        return view('back.orders.index', ['orders' => $orders]);
     }
 
     /**
@@ -53,7 +60,10 @@ class OrderController extends Controller
      */
     public function update(UpdateOrderRequest $request, Order $order)
     {
-        //
+        $order->status = 1;
+        $order->save();
+        return redirect()->back()->with('ok', 'Užsakymas patvirtintas');
+    
     }
 
     /**
@@ -61,6 +71,10 @@ class OrderController extends Controller
      */
     public function destroy(Order $order)
     {
-        //
+        if ($order->status == 0) {
+            return redirect()->back()->with('bad', 'Negalima ištrinti ne užbaigto užsakymo');
+        }
+        $order->delete();
+        return redirect()->back()->with('ok', 'Užsakymas ištrintas');
     }
 }
